@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Kely Jhovany 💜</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body ondblclick="toggleCard()">
+
+  <!-- VIDEO DE FONDO -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="fondo.mp4" type="video/mp4">
+  </video>
+
+  <!-- PORTADA INICIAL -->
+  <div class="cover-screen" id="coverScreen">
+    <div class="cover-content">
+      <div class="cover-heart">💜</div>
+      <h1>Para Kely Jhovany</h1>
+      <p>Hay una sorpresa especial esperándote</p>
+      <button type="button" onclick="enterMainPage()">Abrir sorpresa ✨</button>
+    </div>
+  </div>
+
+  <!-- MENSAJE INICIAL FLOTANTE -->
+  <div class="hint-text" id="hintText">
+    ✨ Haz doble clic en la pantalla ✨
+  </div>
+
+  <!-- TARJETA PRINCIPAL (OCULTA INICIALMENTE) -->
+  <div class="main-container hidden" id="mainCard">
+    <img src="snoopy1.png" class="snoopy-decor top-left" alt="Snoopy 1" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/2/22/Snoopy_Peanuts.png'">
+    <img src="snoopy2.png" class="snoopy-decor bottom-right" alt="Snoopy 2" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/2/22/Snoopy_Peanuts.png'">
+    <img src="snoopy3.png" class="snoopy-decor top-right" alt="Snoopy 3" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/2/22/Snoopy_Peanuts.png'">
+    <img src="snoopy4.png" class="snoopy-decor bottom-left" alt="Snoopy 4" onerror="this.src='https://upload.wikimedia.org/wikipedia/en/2/22/Snoopy_Peanuts.png'">
+
+    <div class="content-left">
+      <div class="letter">
+        <h1>Para Kely Jhovany 💜✨</h1>
+        
+        <p>Hoy es un día muy especial porque cumples tus <strong>19 años</strong>. Quería prepararte este detalle para recordarte lo mucho que te aprecio y lo alegre que hace mi vida contar contigo.</p>
+        
+        <p>Gracias por cada sonrisa, por cada momento compartido y por ser esa persona tan auténtica y bonita. Me alegra haber podido decirte sinceramente el cariño gigante que te tengo.</p>
+        
+        <p>Deseo de todo corazón que este nuevo año de vida venga lleno de sueños cumplidos, muchas alegrías y momentos inolvidables. ¡Te quiero y aprecio muchísimo! 🎉🎂</p>
+      </div>
+
+      <div class="countdown-container">
+        <div class="countdown-title">Esperando tus 19 años en...</div>
+        <div class="timer" id="timer">Cargando...</div>
+      </div>
+    </div>
+
+    <div class="content-right">
+      <canvas id="treeCanvas" width="420" height="420"></canvas>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
