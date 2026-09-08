@@ -35,6 +35,24 @@ function enterMainPage() {
   toggleCard();
 }
 
+function enableVideoAudio() {
+  const bgVideo = document.getElementById('bgVideo');
+  const button = document.getElementById('musicControl');
+  bgVideo.defaultMuted = false;
+  bgVideo.muted = false;
+  bgVideo.volume = 1;
+  const playback = bgVideo.play();
+  playback.then(() => {
+    button.innerText = '🎵';
+    button.title = 'Pausar música';
+    button.setAttribute('aria-label', 'Pausar música');
+  }).catch(() => {
+    button.innerText = '🔇';
+    button.title = 'Activar música';
+    button.setAttribute('aria-label', 'Activar música');
+  });
+}
+
 function toggleCard() {
   const mainCard = document.getElementById('mainCard');
   const hintText = document.getElementById('hintText');
@@ -42,8 +60,7 @@ function toggleCard() {
 
   if (!isVisible) {
     // Reproducir audio del video al interactuar
-    bgVideo.muted = false;
-    bgVideo.play().catch(e => console.log("Audio activado por usuario", e));
+    enableVideoAudio();
 
     mainCard.classList.remove('hidden');
     hintText.innerText = "✨ Haz doble clic para ocultar ✨";
@@ -69,6 +86,7 @@ const leafCount = 1800;
 let leaves = [];
 let trunkScale = 0; // Progreso del crecimiento del tronco (0 a 1)
 let animationFrameId = null;
+let treeCompleted = false;
 
 function prepareLeaves() {
   leaves = [];
@@ -334,6 +352,8 @@ function initTreeAnimation() {
   }
 
   trunkScale = 0;
+  treeCompleted = false;
+  document.querySelector('.tree-stage')?.classList.remove('tree-complete');
   prepareLeaves();
 
   function animate() {
@@ -359,6 +379,12 @@ function initTreeAnimation() {
 
         drawHeart(currentX, currentY, leaf.size, leaf.color);
       });
+
+      if (!treeCompleted && leaves.every(leaf => leaf.progress >= 1)) {
+        treeCompleted = true;
+        document.querySelector('.tree-stage')?.classList.add('tree-complete');
+        launchMiniConfetti(10);
+      }
     }
 
     animationFrameId = requestAnimationFrame(animate);
@@ -366,3 +392,170 @@ function initTreeAnimation() {
 
   animate();
 }
+
+// ==========================================
+// 4. MEJORAS: MÚSICA, PARTÍCULAS Y DETALLE FINAL
+// ==========================================
+let musicEnabled = true;
+
+function toggleMusic(event) {
+  if (event) event.stopPropagation();
+  const bgVideo = document.getElementById('bgVideo');
+  const button = document.getElementById('musicControl');
+
+  if (bgVideo.muted) {
+    enableVideoAudio();
+    musicEnabled = true;
+  } else {
+    bgVideo.muted = true;
+    musicEnabled = false;
+    button.innerText = '🔇';
+    button.title = 'Activar música';
+    button.setAttribute('aria-label', 'Activar música');
+  }
+}
+
+function createFloatingParticle() {
+  const container = document.getElementById('floatingParticles');
+  if (!container) return;
+
+  const particle = document.createElement('span');
+  particle.className = 'particle';
+  const symbols = ['💜', '✨', '♡', '✦', '🌸'];
+  particle.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+  particle.style.left = Math.random() * 100 + 'vw';
+  particle.style.fontSize = (Math.random() * 12 + 10) + 'px';
+  particle.style.animationDuration = (Math.random() * 7 + 7) + 's';
+  particle.style.setProperty('--drift', (Math.random() * 140 - 70) + 'px');
+  container.appendChild(particle);
+
+  setTimeout(() => particle.remove(), 15000);
+}
+
+setInterval(createFloatingParticle, 900);
+for (let i = 0; i < 8; i++) setTimeout(createFloatingParticle, i * 350);
+
+function openFinalMessage(event) {
+  if (event) event.stopPropagation();
+  const overlay = document.getElementById('finalOverlay');
+  overlay.classList.add('show');
+  launchMiniConfetti(22);
+}
+
+function closeFinalMessage(event) {
+  if (event) event.stopPropagation();
+  document.getElementById('finalOverlay').classList.remove('show');
+}
+
+function openEnvelope(event) {
+  if (event) event.stopPropagation();
+  const envelope = document.getElementById('memoryEnvelope');
+  const message = document.getElementById('envelopeMessage');
+  const isOpen = envelope.classList.toggle('open');
+  envelope.setAttribute('aria-expanded', String(isOpen));
+  message.classList.toggle('visible', isOpen);
+  if (isOpen) launchMiniConfetti(12);
+}
+
+function triggerFinalSurprise(event) {
+  if (event) event.stopPropagation();
+  launchMiniConfetti(38);
+  const burst = document.createElement('div');
+  burst.className = 'birthday-burst';
+  burst.innerHTML = '✨ Siempre brilla, Kely 💜<br><small>Tu día merece muchos deseos bonitos</small>';
+  document.body.appendChild(burst);
+  setTimeout(() => burst.remove(), 3800);
+}
+
+let activeSceneId = null;
+let sceneTransitionTimer = null;
+let sceneScrollPosition = 0;
+
+function resetSceneAnimation(panel) {
+  panel.classList.remove('scene-active', 'scene-leaving');
+  void panel.offsetWidth;
+  panel.classList.add('scene-active');
+}
+
+function switchScene(sceneId, event) {
+  if (event) event.stopPropagation();
+  const panel = document.getElementById(sceneId);
+  const experience = document.querySelector('.experience-additions');
+  const mainCard = document.getElementById('mainCard');
+  if (!panel || !experience || !mainCard) return;
+
+  window.clearTimeout(sceneTransitionTimer);
+  sceneScrollPosition = window.scrollY;
+  const currentPanel = activeSceneId ? document.getElementById(activeSceneId) : null;
+  currentPanel?.classList.remove('scene-active');
+  currentPanel?.classList.add('scene-leaving');
+  document.body.classList.add('scene-mode');
+  mainCard.classList.remove('hidden');
+  activeSceneId = sceneId;
+
+  sceneTransitionTimer = window.setTimeout(() => {
+    document.querySelectorAll('.scene-panel').forEach(scene => {
+      if (scene !== panel) scene.classList.remove('scene-active', 'scene-leaving');
+    });
+    resetSceneAnimation(panel);
+    window.scrollTo(0, sceneScrollPosition);
+    if (sceneId === 'closingScene') launchMiniConfetti(18);
+  }, 340);
+}
+
+function returnToMainScene(event) {
+  if (event) event.stopPropagation();
+  window.clearTimeout(sceneTransitionTimer);
+  document.querySelectorAll('.scene-panel').forEach(panel => panel.classList.remove('scene-active', 'scene-leaving'));
+  document.body.classList.remove('scene-mode');
+  activeSceneId = null;
+  window.scrollTo(0, sceneScrollPosition);
+}
+
+const revealItems = document.querySelectorAll('.reveal-on-scroll');
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.16 });
+  revealItems.forEach(item => revealObserver.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add('is-visible'));
+}
+
+function launchMiniConfetti(amount = 35) {
+  const symbols = ['💜', '✨', '🎉', '🌸', '♡'];
+  for (let i = 0; i < amount; i++) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    piece.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.setProperty('--x', (Math.random() * 240 - 120) + 'px');
+    piece.style.setProperty('--fall', (Math.random() * 2 + 2.5) + 's');
+    piece.style.animationDelay = (Math.random() * .7) + 's';
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 4500);
+  }
+}
+
+// Cuando llegue el cumpleaños, se celebra automáticamente una sola vez.
+let birthdayCelebrated = false;
+const originalUpdateCountdown = updateCountdown;
+updateCountdown = function() {
+  originalUpdateCountdown();
+  const difference = targetDate - new Date();
+  if (difference <= 0 && !birthdayCelebrated) {
+    birthdayCelebrated = true;
+    const burst = document.createElement('div');
+    burst.className = 'birthday-burst';
+    burst.innerHTML = '🎂 ¡FELIZ CUMPLEAÑOS, KELY! 💜<br><small>✨ 19 años ✨</small>';
+    document.body.appendChild(burst);
+    launchMiniConfetti(55);
+    setTimeout(() => burst.remove(), 3800);
+  }
+};
+updateCountdown();

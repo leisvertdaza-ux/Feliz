@@ -10,7 +10,7 @@
 <body ondblclick="toggleCard()">
 
   <!-- VIDEO DE FONDO -->
-  <video autoplay muted loop id="bgVideo">
+  <video autoplay muted loop playsinline preload="auto" id="bgVideo">
     <source src="fondo.mp4" type="video/mp4">
   </video>
 
@@ -28,6 +28,10 @@
   <div class="hint-text" id="hintText">
     ✨ Haz doble clic en la pantalla ✨
   </div>
+
+  <!-- CONTROLES DECORATIVOS -->
+  <button class="music-control" id="musicControl" type="button" onclick="toggleMusic(event)" aria-label="Activar música" title="Activar música">🔇</button>
+  <div class="floating-particles" id="floatingParticles" aria-hidden="true"></div>
 
   <!-- TARJETA PRINCIPAL (OCULTA INICIALMENTE) -->
   <div class="main-container hidden" id="mainCard">
@@ -53,8 +57,90 @@
       </div>
     </div>
 
-    <div class="content-right">
+    <div class="content-right tree-stage">
       <canvas id="treeCanvas" width="420" height="420"></canvas>
+      <p class="tree-note">Que cada corazón guarde un deseo bonito para tu nuevo año ✨</p>
+    </div>
+
+    <!-- DETALLES EXTRA: NO REEMPLAZAN EL CONTENIDO ORIGINAL -->
+    <div class="extra-details">
+      <div class="section-title">✨ Un poquito más para ti ✨</div>
+
+      <div class="wish-cards">
+        <button class="wish-card" type="button" data-scene-target="envelopeScene" onclick="switchScene('envelopeScene', event)">
+          <span>🌷</span>
+          <strong>Un deseo</strong>
+          <p>Que nunca te falten motivos para sonreír.</p>
+        </button>
+        <button class="wish-card" type="button" data-scene-target="memoriesScene" onclick="switchScene('memoriesScene', event)">
+          <span>⭐</span>
+          <strong>Un recuerdo</strong>
+          <p>Que este nuevo año esté lleno de momentos bonitos.</p>
+        </button>
+        <button class="wish-card" type="button" data-scene-target="closingScene" onclick="switchScene('closingScene', event)">
+          <span>💜</span>
+          <strong>Un mensaje</strong>
+          <p>Gracias por ser una persona tan especial.</p>
+        </button>
+      </div>
+
+      <button class="envelope-button" type="button" onclick="openFinalMessage(event)">💌 Abrir un último detalle</button>
+    </div>
+  </div>
+
+  <main class="experience-additions" aria-label="Detalles especiales para Kely">
+    <section class="memories-section scene-panel" id="memoriesScene" data-scene-title="Algunos momentos que quiero guardar contigo">
+      <button class="scene-back" type="button" onclick="returnToMainScene(event)">← Volver</button>
+      <p class="eyebrow">Pequeños instantes</p>
+      <h2>📸 Algunos momentos que quiero guardar contigo 💜</h2>
+      <p class="section-intro">Un espacio para llenar poquito a poquito con nuestras historias favoritas.</p>
+      <div class="memory-grid">
+        <figure class="polaroid polaroid-lilac">
+          <div class="photo-placeholder">Tu foto aquí</div>
+          <figcaption>Un día para recordar</figcaption>
+        </figure>
+        <figure class="polaroid polaroid-rose">
+          <div class="photo-placeholder">Añade un recuerdo</div>
+          <figcaption>Una sonrisa compartida</figcaption>
+        </figure>
+        <figure class="polaroid polaroid-gold">
+          <div class="photo-placeholder">Próximo momento</div>
+          <figcaption>Más aventuras contigo</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="envelope-section scene-panel" id="envelopeScene" aria-label="Un último detalle" data-scene-title="Un último detalle">
+      <button class="scene-back" type="button" onclick="returnToMainScene(event)">← Volver</button>
+      <button class="envelope" id="memoryEnvelope" type="button" onclick="openEnvelope(event)" aria-expanded="false">
+        <span class="envelope-flap"></span>
+        <span class="envelope-paper">💌</span>
+        <span class="envelope-label">Un último detalle</span>
+      </button>
+      <p class="envelope-message" id="envelopeMessage">Gracias por existir de una forma tan bonita. Siempre habrá un lugar especial para ti en mis mejores recuerdos.</p>
+    </section>
+
+    <section class="closing-section scene-panel" id="closingScene" data-scene-title="Feliz cumpleaños, Kely">
+      <button class="scene-back" type="button" onclick="returnToMainScene(event)">← Volver</button>
+      <div class="closing-stars" aria-hidden="true">✦　♡　✦</div>
+      <p class="eyebrow">Para celebrar tu vida</p>
+      <h2>🎂 Feliz cumpleaños, Kely 💜</h2>
+      <p>Que este nuevo capítulo llegue suave, luminoso y lleno de momentos que te hagan sonreír sin darte cuenta.</p>
+      <button class="surprise-button" type="button" onclick="triggerFinalSurprise(event)">Un último detalle 💜</button>
+    </section>
+  </main>
+
+  <!-- MENSAJE FINAL -->
+  <div class="final-overlay" id="finalOverlay" onclick="closeFinalMessage(event)">
+    <div class="final-card" onclick="event.stopPropagation()">
+      <button class="close-final" type="button" onclick="closeFinalMessage(event)">×</button>
+      <div class="final-icon">💌</div>
+      <p class="final-small">Un último detalle para ti</p>
+      <h2>Feliz cumpleaños, Kely 💜</h2>
+      <div class="final-divider">✦ ✦ ✦</div>
+      <p>Espero que estos 19 años traigan nuevas aventuras, sueños cumplidos y muchísimas razones para estar feliz.</p>
+      <p class="final-signature">Con mucho cariño ✨</p>
+      <button class="final-close-button" type="button" onclick="closeFinalMessage(event)">Guardar este momento 💜</button>
     </div>
   </div>
 
