@@ -95,17 +95,41 @@
       <h2>📸 Algunos momentos que quiero guardar contigo 💜</h2>
       <p class="section-intro">Un espacio para llenar poquito a poquito con nuestras historias favoritas.</p>
       <div class="memory-grid">
-        <figure class="polaroid polaroid-lilac">
-          <div class="photo-placeholder">Tu foto aquí</div>
-          <figcaption>Un día para recordar</figcaption>
+        <figure class="polaroid polaroid-lilac" tabindex="0" role="button" aria-pressed="false" aria-label="Voltear la foto: un día para recordar" onclick="this.classList.toggle('is-flipped'); this.setAttribute('aria-pressed', this.classList.contains('is-flipped'))" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }">
+          <div class="polaroid-inner">
+            <div class="polaroid-face polaroid-front">
+              <img class="photo-placeholder" src="imagen.png" alt="Momento en la playa para recordar">
+              <figcaption>Un día para recordar</figcaption>
+            </div>
+            <div class="polaroid-face polaroid-back">
+              <p>Los mejores recuerdos nacen de momentos sencillos compartidos contigo.</p>
+              <span>💜</span>
+            </div>
+          </div>
         </figure>
-        <figure class="polaroid polaroid-rose">
-          <div class="photo-placeholder">Añade un recuerdo</div>
-          <figcaption>Una sonrisa compartida</figcaption>
+        <figure class="polaroid polaroid-rose" tabindex="0" role="button" aria-pressed="false" aria-label="Voltear la foto: una sonrisa compartida" onclick="this.classList.toggle('is-flipped'); this.setAttribute('aria-pressed', this.classList.contains('is-flipped'))" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }">
+          <div class="polaroid-inner">
+            <div class="polaroid-face polaroid-front">
+              <img class="photo-placeholder" src="imagen01.png" alt="Sonrisa compartida junto al mar">
+              <figcaption>Una sonrisa compartida</figcaption>
+            </div>
+            <div class="polaroid-face polaroid-back">
+              <p>Tu sonrisa hace que cualquier aventura se vuelva inolvidable.</p>
+              <span>✨</span>
+            </div>
+          </div>
         </figure>
-        <figure class="polaroid polaroid-gold">
-          <div class="photo-placeholder">Próximo momento</div>
-          <figcaption>Más aventuras contigo</figcaption>
+        <figure class="polaroid polaroid-gold" tabindex="0" role="button" aria-pressed="false" aria-label="Voltear la foto: más aventuras contigo" onclick="this.classList.toggle('is-flipped'); this.setAttribute('aria-pressed', this.classList.contains('is-flipped'))" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }">
+          <div class="polaroid-inner">
+            <div class="polaroid-face polaroid-front">
+              <img class="photo-placeholder" src="imag.png" alt="Nueva aventura juntos en la playa">
+              <figcaption>Más aventuras contigo</figcaption>
+            </div>
+            <div class="polaroid-face polaroid-back">
+              <p>Que nunca nos falten nuevos lugares, risas y aventuras por vivir.</p>
+              <span>🌊</span>
+            </div>
+          </div>
         </figure>
       </div>
     </section>
