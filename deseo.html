@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6a1b9a">
+  <title>Un deseo para Kely 💜</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="paginas.css">
+</head>
+<body>
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="fondo.mp4" type="video/mp4"></video>
+  <div class="page-veil" aria-hidden="true"></div>
+  <div class="lilac-fall-layer" aria-hidden="true"></div>
+  <a class="back-link" href="index.html#inicio">← Volver</a>
+  <button class="music-control" id="musicControl" type="button" aria-label="Activar música">🔇</button>
+
+  <main class="page-wrap">
+    <article class="page-card">
+      <span class="corner-flower one" aria-hidden="true"></span><span class="corner-flower two" aria-hidden="true"></span>
+      <img class="snoopy-peek" src="snoopy1.png" alt="Snoopy asomándose">
+      <p class="eyebrow">Palabras guardadas con amor</p>
+      <h1>Una carta para ti 💜</h1>
+      <p>Abre el sobre: preparé unas palabras que quería compartir contigo.</p>
+      <button class="envelope-play" id="wishEnvelope" type="button" aria-expanded="false" aria-label="Abrir el sobre">
+        <span class="flap" aria-hidden="true"></span>
+        <span class="paper" aria-hidden="true">Una carta para Kely ✨</span>
+      </button>
+      <p class="typed-letter" id="typedLetter" aria-live="polite"></p>
+
+      <section class="wish-list hidden" id="wishList" aria-label="Frases para ti">
+        <div class="wish-note"><span class="flower-icon" aria-hidden="true"></span>En tus ojos veo el cielo; en tu risa, la mañana. Eres mi sueño y mi anhelo, mi dulce y tierna dama.</div>
+        <div class="wish-note"><span class="flower-icon" aria-hidden="true"></span>Mi alma te reconoció antes que yo; te buscó entre sueños y entre silencios, hasta que por fin te encontró.</div>
+        <div class="wish-note"><span class="flower-icon" aria-hidden="true"></span>Con la tinta de mi tintero te escribiré un «te quiero» y con el fuego de mi corazón te lo haré verdadero.</div>
+        <div class="wish-note"><span class="flower-icon" aria-hidden="true"></span>Eres bonita sin hacer el intento, como si la belleza fuera tu fundamento. Tu risa es una melodía, tu voz una canción. Cuando me habla, se me acelera el corazón.</div>
+      </section>
+
+      <section class="garden hidden" id="wishGarden">
+        <h2>Jardín de deseos 🌷</h2>
+        <p>Elige una flor y lee el mensaje que esconde.</p>
+        <div class="garden-flowers" id="gardenFlowers"></div>
+        <p class="garden-result" id="gardenResult" aria-live="polite"></p>
+        <h2 class="hidden" id="allWishes">Todos tus deseos van en camino 💜</h2>
+      </section>
+    </article>
+  </main>
+  <nav class="page-nav" aria-label="Más detalles">
+    <a href="deseo.html" aria-current="page">Un deseo</a><a href="recuerdos.html">Un recuerdo</a><a href="mensaje.html">Un mensaje</a>
+  </nav>
+  <script src="paginas.js"></script>
+</body>
+</html>

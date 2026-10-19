@@ -1,0 +1,149 @@
+:root {
+  --flower: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='%23ce93d8'%3E%3Ccircle cx='32' cy='13' r='11'/%3E%3Ccircle cx='50' cy='26' r='11'/%3E%3Ccircle cx='43' cy='47' r='11'/%3E%3Ccircle cx='21' cy='47' r='11'/%3E%3Ccircle cx='14' cy='26' r='11'/%3E%3C/g%3E%3Ccircle cx='32' cy='31' r='8' fill='%23ffd54f'/%3E%3C/svg%3E");
+  --lilac-1: #ea80fc;
+  --lilac-2: #ce93d8;
+  --lilac-3: #ab47bc;
+  --lilac-4: #6a1b9a;
+}
+
+.lilac-fall-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.lilac-fall {
+  position: absolute;
+  top: -48px;
+  left: var(--left);
+  width: var(--size);
+  height: var(--size);
+  background: var(--flower) center / contain no-repeat;
+  opacity: var(--opacity);
+  animation: lilac-fall var(--duration) linear forwards;
+}
+
+@keyframes lilac-fall {
+  to { transform: translate3d(var(--drift), 112vh, 0) rotate(420deg); }
+}
+
+.wish-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: manipulation;
+  transform-style: preserve-3d;
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.wish-card::after {
+  position: absolute;
+  z-index: -1;
+  top: -80%;
+  left: -65%;
+  width: 38%;
+  height: 260%;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.82), transparent);
+  transform: rotate(22deg);
+  transition: left .75s ease;
+  pointer-events: none;
+}
+
+.wish-card:hover::after,
+.wish-card:focus-visible::after { left: 135%; }
+.wish-card:hover,
+.wish-card:focus-visible {
+  transform: perspective(900px) translateY(-5px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg)) translateZ(12px);
+  box-shadow: 0 20px 30px rgba(74,20,140,.24);
+}
+.wish-card > span { display: inline-block; transform: translateZ(22px); transition: transform .35s ease; }
+.wish-card strong { transform: translateZ(18px); }
+.wish-card p { transform: translateZ(10px); }
+.wish-card:hover > span,
+.wish-card:focus-visible > span { animation: flower-bounce .7s ease-in-out infinite alternate; }
+
+@keyframes flower-bounce {
+  to { transform: translateY(-7px) rotate(12deg) scale(1.12); }
+}
+
+.envelope-button { animation: last-detail-pulse 2s ease-in-out infinite; }
+
+@keyframes last-detail-pulse {
+  0%, 100% { box-shadow: 0 8px 20px rgba(74,20,140,.18); }
+  50% { box-shadow: 0 0 24px rgba(234,128,252,.88), 0 0 42px rgba(171,71,188,.36); }
+}
+
+.lilac-cursor {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  color: #ea80fc;
+  font-size: var(--size, 18px);
+  line-height: 1;
+  pointer-events: none;
+  text-shadow: 0 0 12px rgba(234,128,252,.9);
+  animation: cursor-sparkle .8s ease-out forwards;
+}
+
+@keyframes cursor-sparkle {
+  to { opacity: 0; transform: translate(var(--drift), -30px) rotate(35deg) scale(.35); }
+}
+
+.lilac-flash {
+  position: fixed;
+  z-index: 100;
+  left: var(--x);
+  top: var(--y);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 12%, #ea80fc 25%, rgba(206,147,216,.3) 62%, transparent 72%);
+  pointer-events: none;
+  animation: touch-flash .62s ease-out forwards;
+}
+
+@keyframes touch-flash {
+  to { opacity: 0; transform: scale(5); }
+}
+
+.lilac-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(206,147,216,0);
+  pointer-events: none;
+  transition: background .65s ease;
+}
+
+.lilac-transition.is-leaving { background: rgba(106,27,154,.88); }
+.transition-flower {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--size);
+  height: var(--size);
+  background: var(--flower) center / contain no-repeat;
+  opacity: 0;
+  transform: translate(-50%,-50%) scale(.2);
+  animation: flower-explode .75s cubic-bezier(.15,.7,.3,1) forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes flower-explode {
+  10% { opacity: 1; }
+  to { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--rotate)) scale(1.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lilac-fall, .lilac-cursor, .lilac-flash, .transition-flower { animation: none; }
+  .envelope-button { animation: none; }
+  .wish-card::after { transition: none; }
+  .wish-card, .wish-card:hover, .wish-card:focus-visible { transform: none; transition: none; }
+}

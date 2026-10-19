@@ -1,0 +1,24 @@
+warning: in the working copy of 'script.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'style.css', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/script.js b/script.js[m
+[1mindex e26d483..b28bbbb 100644[m
+[1m--- a/script.js[m
+[1m+++ b/script.js[m
+[36m@@ -558,4 +558,4 @@[m [mupdateCountdown = function() {[m
+     setTimeout(() => burst.remove(), 3800);[m
+   }[m
+ };[m
+[31m-updateCountdown();[m
+[32m+[m[32mupdateCountdown();[m
+\ No newline at end of file[m
+[1mdiff --git a/style.css b/style.css[m
+[1mindex 7dacd49..5f2dfdf 100644[m
+[1m--- a/style.css[m
+[1m+++ b/style.css[m
+[36m@@ -689,4 +689,4 @@[m [mbody.scene-mode .scene-active .surprise-button { animation: sceneContentRise .65[m
+ [m
+ @media (prefers-reduced-motion: reduce) {[m
+   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m

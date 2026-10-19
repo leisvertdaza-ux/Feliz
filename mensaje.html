@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6a1b9a">
+  <title>Feliz cumpleaños, Kely 💜</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="paginas.css">
+</head>
+<body>
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="fondo.mp4" type="video/mp4"></video>
+  <div class="page-veil" aria-hidden="true"></div>
+  <div class="lilac-fall-layer" aria-hidden="true"></div>
+  <a class="back-link" href="index.html#inicio">← Volver</a>
+  <button class="music-control" id="musicControl" type="button" aria-label="Activar música">🔇</button>
+
+  <main class="page-wrap">
+    <article class="page-card">
+      <span class="corner-flower one" aria-hidden="true"></span><span class="corner-flower two" aria-hidden="true"></span>
+      <img class="snoopy-peek" src="snoopy3.png" alt="Snoopy asomándose">
+      <p class="eyebrow">Llegó tu día</p>
+      <h1>Un mensaje para ti 🎂</h1>
+      <p>Apaga las velitas del pastel para descubrir tu sorpresa.</p>
+      <button class="cake-button" id="cakeButton" type="button" aria-label="Apagar las tres velas del pastel">
+        <span class="cake" id="birthdayCake" aria-hidden="true">
+          <span class="cake-tier tier-bottom"></span><span class="cake-tier tier-top"></span>
+          <span class="candle candle-left"><span class="flame"></span><span class="smoke"></span></span>
+          <span class="candle candle-center"><span class="flame"></span><span class="smoke"></span></span>
+          <span class="candle candle-right"><span class="flame"></span><span class="smoke"></span></span>
+        </span>
+      </button>
+      <section class="birthday-reveal" id="birthdayReveal" aria-live="polite">
+        <div class="age-number">19</div>
+        <h2>¡Feliz cumpleaños, Kely! 💜</h2>
+        <p>¡Felices 19, Kely! Que esta nueva vuelta al sol te acerque a todo lo que te ilusiona y te regale razones para celebrar cada día. Sigue brillando con esa luz tan tuya.</p>
+        <p><strong>Con mucho cariño ✨</strong></p>
+      </section>
+    </article>
+  </main>
+  <nav class="page-nav" aria-label="Más detalles">
+    <a href="deseo.html">Un deseo</a><a href="recuerdos.html">Un recuerdo</a><a href="mensaje.html" aria-current="page">Un mensaje</a>
+  </nav>
+  <script src="paginas.js"></script>
+</body>
+</html>
